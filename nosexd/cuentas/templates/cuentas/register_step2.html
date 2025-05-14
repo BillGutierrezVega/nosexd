@@ -1,0 +1,12 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Registro - Paso 2{% endblock %}
+
+{% block content %}
+<h2>Completa tu Perfil</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Finalizar</button>
+</form>
+{% endblock %}

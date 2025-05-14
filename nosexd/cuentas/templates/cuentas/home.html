@@ -1,0 +1,12 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Bienvenido a nosexd{% endblock %}
+
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-4">Bienvenido a <strong>nosexd</strong></h1>
+    <p class="lead">Conecta con otros estudiantes de forma natural.</p>
+    <a href="{% url 'login' %}" class="btn btn-primary btn-lg mt-4">Iniciar sesión</a>
+    <a href="{% url 'register_step1' %}" class="btn btn-outline-primary btn-lg mt-4 ms-3">Registrarse</a>
+</div>
+{% endblock %}
