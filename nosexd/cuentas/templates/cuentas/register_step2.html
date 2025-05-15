@@ -1,12 +1,27 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Registro - Paso 2{% endblock %}
+{% block title %}Completa tu Perfil - nosexd{% endblock %}
 
 {% block content %}
-<h2>Completa tu Perfil</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Finalizar</button>
-</form>
+    {% block mensaje %}
+    {% endblock mensaje %}
+    <div class="container py-5">
+        <h2 class="text-center text-primary mb-4">Completa tu Perfil</h2>
+
+        <div class="mx-auto p-4 bg-white shadow rounded" style="max-width: 600px;">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger small">{{ field.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-success w-100">Finalizar</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}

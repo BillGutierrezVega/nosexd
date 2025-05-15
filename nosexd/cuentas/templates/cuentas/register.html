@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Regístrate - nosexd{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center text-primary mb-4">Regístrate</h2>
+
+    <div class="mx-auto p-4 bg-white shadow rounded" style="max-width: 500px;">
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="mb-3">
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="text-danger small">{{ field.errors|striptags }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-success w-100">Siguiente</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

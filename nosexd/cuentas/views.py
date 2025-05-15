@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .forms import UserRegisterForm, ProfileForm, LoginForm
 from .models import Profile
 from django.contrib.auth.models import User
@@ -16,7 +17,7 @@ def register_step1(request):
             return redirect('register_step2')
     else:
         form = UserRegisterForm()
-    return render(request, 'cuentas/register_step1.html', {'form': form})
+    return render(request, 'cuentas/register.html', {'form': form})
 
 @login_required
 def register_step2(request):
@@ -31,6 +32,7 @@ def register_step2(request):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
+            messages.success(request, '¡Tu perfil ha sido completado con éxito! 🎉')
             return redirect('dashboard')
     else:
         form = ProfileForm(instance=profile)
