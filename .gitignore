@@ -36,4 +36,9 @@ static/
 media/
 
 
+# variables de entorno
+.env
+nosexd/env.env
+
+
 # End of https://www.toptal.com/developers/gitignore/api/venv
