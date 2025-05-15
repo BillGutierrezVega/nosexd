@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, ProfileForm, LoginForm
@@ -62,6 +62,15 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
-
 def home(request):
     return render(request, 'cuentas/home.html')
+
+@login_required
+def profile_list(request):
+    perfiles = Profile.objects.select_related('user').all()
+    return render(request, 'cuentas/profile_list.html', {'perfiles': perfiles})
+
+@login_required
+def profile_detail(request, pk):
+    profile = get_object_or_404(Profile, pk=pk)
+    return render(request, 'cuentas/profile_detail.html', {'profile': profile})

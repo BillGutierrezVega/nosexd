@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Perfiles Registrados{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Perfiles Registrados</h2>
+  <div class="row">
+    {% for perfil in perfiles %}
+      <div class="col-md-4 mb-3">
+        <div class="card h-100">
+          {% if perfil.profile_picture %}
+            <img src="{{ perfil.profile_picture.url }}" class="card-img-top profile-image" alt="Foto de perfil">
+          {% else %}
+            <img src="{% static 'img/default-profile.png' %}" class="card-img-top" alt="Sin foto">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ perfil.user.username }}</h5>
+            <p class="card-text">Facultad: {{ perfil.faculty }}</p>
+            <p class="card-text">Semestre: {{ perfil.semester }}</p>
+            <a href="{% url 'profile_detail' perfil.pk %}" class="btn btn-primary">Ver Detalles</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>No hay perfiles disponibles.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

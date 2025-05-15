@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% block title %}Detalle del Perfil{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+  <h2>{{ profile.user.username }}</h2>
+  <p><strong>Facultad:</strong> {{ profile.faculty }}</p>
+  <p><strong>Semestre:</strong> {{ profile.semester }}</p>
+  {% if profile.profile_picture %}
+    <img src="{{ profile.profile_picture.url }}" alt="Foto de perfil" class="img-thumbnail" width="200">
+  {% else %}
+    <p>Sin foto de perfil.</p>
+  {% endif %}
+  <a href="{% url 'profile_list' %}" class="btn btn-secondary mt-3">Volver</a>
+</div>
+{% endblock %}
